@@ -1,0 +1,7 @@
+# Example of a Caddyfile using Cloudflare DNS and SSL
+service.example.com {
+        tls {
+                dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+        }
+        reverse_proxy service:port
+}
