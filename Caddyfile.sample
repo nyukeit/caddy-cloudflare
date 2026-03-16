@@ -1,4 +1,46 @@
 # Example of a Caddyfile using Cloudflare DNS and SSL
+# Update: Includes sample l4protocol settings for email services like Stalwart
+{
+    layer4 {
+        0.0.0.0:25 {
+            route {
+                proxy {
+                    proxy_protocol v2
+                    upstream 127.0.0.1:10025
+                }
+            }
+        }
+
+        0.0.0.0:993 {
+            route {
+                proxy {
+                    proxy_protocol v2
+                    upstream 127.0.0.1:10993
+                }
+            }
+        }
+
+        0.0.0.0:465 {
+            route {
+                proxy {
+                    proxy_protocol v2
+                    upstream 127.0.0.1:10465
+                }
+            }
+        }
+    }
+}
+
+mail.example.com {
+    reverse_proxy https://127.0.0.1:10443 {
+        transport http {
+            proxy_protocol v2
+            tls_server_name mail.example.com
+        }
+    }
+}
+
+
 service.example.com {
         tls {
                 dns cloudflare {env.CLOUDFLARE_API_TOKEN}

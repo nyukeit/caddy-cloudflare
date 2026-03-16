@@ -1,5 +1,6 @@
-# Caddy Docker with Cloudflare DNS integrated
+# Caddy Docker with Cloudflare DNS and Layer 4 Proxy Protocol
 Custom built Caddy Docker Image with the official Cloudflare DNS module integrated. This module enables Caddy to issue ACME DNS-01 challenge certificates using Cloudflare DNS for your internal services.
+This image has been updated to include the Layer 4 Proxy Protocol wrapper to support self-hosting email services like Stalwart
 
 ## Prerequisites
 You must have a valid publicly accessible domain name whose DNS records are being managed by Cloudflare.
